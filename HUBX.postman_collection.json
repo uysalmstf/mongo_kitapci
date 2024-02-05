@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "0a7aca89-7d80-45d6-8655-ba843d4f180c",
+		"name": "HUBX",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1301963"
+	},
+	"item": [
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3003/author/list",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"author",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"mustafa\",\n    \"country\": \"tr\",\n    \"birth_date\": \"1991-01-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3003/author/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"author",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3003/book/list",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"book",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"1\",\n    \"author_id\": \"65c01062574ffde64d3055b8\",\n    \"price\": \"200.00\",\n    \"isbn\": \"1111\",\n    \"lang\": \"tr\",\n    \"page_number\": \"111\",\n    \"publisher\": \"ahmet mehmet\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3003/book/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"book",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"65c108760d57423b179cac31\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3003/book/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"book",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"65c1154d566e6feb584cbf73\",\n    \"title\": \"2\",\n    \"author_id\": \"65c01062574ffde64d3055b8\",\n    \"price\": \"200.00\",\n    \"isbn\": \"1111\",\n    \"lang\": \"tr\",\n    \"page_number\": \"111\",\n    \"publisher\": \"ahmet mehmet\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3003/book/update",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"book",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
