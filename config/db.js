@@ -4,8 +4,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const connectDB = () => {
-  console.log("conn2")
-  console.log(process.env.PROD)
    // dbURI = 'mongodb://172.19.0.2:27017/mongotest'
     try {
       mongoose.connect(process.env.MONGO_URL).catch((err) => {
