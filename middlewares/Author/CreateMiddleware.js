@@ -20,7 +20,7 @@ const isValidCreatePostData = (request, response, next) => {
         response.status(403).json({
             'error': true,
             'message': "Bazı alanlar boş. Kontrol ediniz",
-            'fields': emptyFields
+            'data': emptyFields
         });
 };
 

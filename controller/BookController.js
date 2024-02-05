@@ -6,11 +6,18 @@ const list = async (req, res, next) => {
     try {
         const books = await Book.find({});
         return res.status(200).json({
+            error: false,
             message: "işlem başarılı",
             data: books
         })
     } catch (err) {
-        console.error('Error retrieving books:', err);
+        console.error('Kitap Listeleme Hatası -> ', err);
+
+        response.status(403).json({
+            'error': true,
+            'message': "Kitap Listeleme Hatası",
+            'fields': err
+          });
     }
 }
 
@@ -30,31 +37,70 @@ const create = async (req, res, next) => {
             publisher: req.body.publisher 
           };
 
-        Book.create(newBook).then((res) => {
-            console.log(res)
-        }).catch((err) => {
-            console.log(err)
-        })
+          try {
+            let result = Book.create(newBook)
+            if (result != null) {
+                return res.status(200).json({
+                    'error': false,
+                    'message': "Kitap Ekleme Başarılı",
+                    'data': null
+                })
+            }
+            response.status(200).json({
+                'error': true,
+                'message': "Kitap Ekleme Hatası",
+                'data': null
+            });
+          } catch (error) {
+            console.error('Kitap Ekleme Hatası (ekleme anı) -> ', err);
 
-        return res.status(200).json({
-            message: "işlem başarılı",
-            data: newBook
-        })
+            response.status(403).json({
+                'error': true,
+                'message': "Kitap Ekleme Hatası",
+                'data': err
+            });
+          }
+
     } catch (err) {
-        console.error('Error adding books:', err);
+        console.error('Kitap Ekleme Hatası -> ', err);
+
+        response.status(403).json({
+            'error': true,
+            'message': "Kitap Ekleme Hatası",
+            'data': err
+          });
     }
 }
 
 const deleteBook = async (req, res, next) => {
 
-    Book.deleteOne( { _id: req.body.id } ).then((result) => {
-        console.log(result)
-    })
+    try {
+        let result = await Book.deleteOne( { _id: req.body.id } ) 
+        if (result != null) {
+            return res.status(200).json({
+                'error': false,
+                'message': "Kitap Silme Başarılı",
+                'data': null
+            })   
+        }
+        return res.status(200).json({
+            'error': true,
+            'message': "Kitap Silme Başarısız",
+            'data': null
+        })   
+        
+    } catch (error) {
+        console.log("Kitap Silme Hatası -> ", error)
 
-    return res.status(200).json({
-        message: "işlem başarılı",
-        data: null
-    })
+        return res.status(403).json({
+            'error': true,
+            'message': "Kitap Silme Başarısız",
+            'data': error
+        })   
+    }
+    
+
+    
 }
 
 const updateBook = async (req, res, next) => {
@@ -71,21 +117,40 @@ const updateBook = async (req, res, next) => {
             page_number: req.body.page_number,
             publisher: req.body.publisher 
           };
-          console.log(updatedBook)
-        Book.findOneAndUpdate({_id: req.body.id}, updatedBook, {
-            new: true
-          }).then((res) => {
-            console.log(res)
-        }).catch((err) => {
-            console.log(err)
-        })
 
-        return res.status(200).json({
-            message: "işlem başarılı",
-            data: updatedBook
-        })
+          try {
+            let result = Book.findOneAndUpdate({_id: req.body.id}, updatedBook);
+              if (result != null) {
+                return res.status(200).json({
+                    'error': false,
+                    'message': "İşlem Başarılı",
+                    'data': null
+                })
+              }
+              return res.status(200).json({
+                'error': true,
+                'message': "İşlem Başarısız",
+                'data': null
+            })
+          } catch (error) {
+            console.error('Kitap Güncelleme Hatası -> ', error);
+        
+            return res.status(403).json({
+                'error': true,
+                'message': "Kitap Güncelleme Başarısız",
+                'data': error
+            })  
+          }
+        
     } catch (err) {
+        
         console.error('Error adding books:', err);
+        
+        return res.status(403).json({
+            'error': true,
+            'message': "Kitap Güncelleme Başarısız",
+            'data': err
+        })  
     }
 
 }

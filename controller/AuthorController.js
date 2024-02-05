@@ -12,7 +12,13 @@ const list = async (req, res, next) => {
             data: authors
         })
     } catch (err) {
-        console.error('Error retrieving authors:', err);
+      console.log("Yazar Getirme Hatası -> ", error)
+
+      response.status(403).json({
+        'error': true,
+        'message': "Yazar Getirme Hatası",
+        'data': err
+      });
     }
 }
 
@@ -20,31 +26,46 @@ const create = async (req, res, next) => {
 
     const data = req.body
 
-    const newAuthor = new Author({
+    try {
+      const newAuthor = new Author({
         name: data.name,
         country: data.country,
         birth_date: data.birth_date
       });
     
       // Save the new book to the database
-    let id = newAuthor.save().then((result) => {
+      let id = newAuthor.save().then((result) => {
         return result
       }).catch((error) => {
         //console.log("author insert err: ", error);
         return 0;
       })
-      console.log(id)
 
       if (id == 0) {
-        return res.status(200).json({
-            message: "Yazar Ekleme İşlemi Başarısız",
-        })
+        response.status(403).json({
+          'error': true,
+          'message': "Yazar Ekleme Hatası",
+          'data': null
+        });
       } else {
-        return res.status(200).json({
-            message: "Yazar Ekleme İşlemi Başarılı",
-        })
+        response.status(200).json({
+          'error': false,
+          'message': "Yazar Ekleme Başarılı",
+          'data': null
+        });
       }
 
+    } catch (error) {
+      
+      console.log("Yazar Ekleme Hatası -> ", error)
+
+      response.status(403).json({
+        'error': true,
+        'message': "Yazar Ekleme Hatası",
+        'data': error
+      });
+    }
+    
     mongoose.disconnect();
 }
 module.exports = {
