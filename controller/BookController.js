@@ -16,7 +16,7 @@ const list = async (req, res, next) => {
         response.status(403).json({
             'error': true,
             'message': "Kitap Listeleme Hatası",
-            'fields': err
+            'data': err
           });
     }
 }

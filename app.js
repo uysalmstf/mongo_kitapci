@@ -30,7 +30,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/book', BookRoutes);
 app.use('/author', AuthorRoutes);
-
+app.use((error, req, res, next) => {
+  // handle the error
+  res.status(500).json({
+    'error': true,
+    'message': "Bir Hata Oluştu",
+    'data': error
+  });
+}); 
 
 app.listen(port, () => {
     console.log(`Server is running on port ` + port);
