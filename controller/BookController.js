@@ -13,7 +13,7 @@ const list = async (req, res, next) => {
     } catch (err) {
         console.error('Kitap Listeleme Hatası -> ', err);
 
-        response.status(403).json({
+        res.status(403).json({
             'error': true,
             'message': "Kitap Listeleme Hatası",
             'data': err
@@ -46,7 +46,7 @@ const create = async (req, res, next) => {
                     'data': null
                 })
             }
-            response.status(200).json({
+            res.status(200).json({
                 'error': true,
                 'message': "Kitap Ekleme Hatası",
                 'data': null
@@ -54,7 +54,7 @@ const create = async (req, res, next) => {
           } catch (error) {
             console.error('Kitap Ekleme Hatası (ekleme anı) -> ', err);
 
-            response.status(403).json({
+            res.status(403).json({
                 'error': true,
                 'message': "Kitap Ekleme Hatası",
                 'data': err
@@ -64,7 +64,7 @@ const create = async (req, res, next) => {
     } catch (err) {
         console.error('Kitap Ekleme Hatası -> ', err);
 
-        response.status(403).json({
+        res.status(403).json({
             'error': true,
             'message': "Kitap Ekleme Hatası",
             'data': err

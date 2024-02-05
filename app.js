@@ -9,7 +9,6 @@ const app = express();
 
 
 const connectDb = require('./config/db');
-const Author = require("./models/Author");
 
 const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
