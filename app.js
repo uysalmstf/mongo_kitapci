@@ -1,5 +1,7 @@
 const winston = require("winston");
 const express = require('express');
+const request = require('supertest');
+
 const dotenv = require('dotenv');
 const BookRoutes = require("./routes/BookRoutes")
 const AuthorRoutes = require("./routes/AuthorRoutes")
@@ -41,3 +43,5 @@ app.use((error, req, res, next) => {
 app.listen(port, () => {
     console.log(`Server is running on port ` + port);
   });
+
+  module.exports = app;
